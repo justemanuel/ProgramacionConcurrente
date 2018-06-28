@@ -25,7 +25,14 @@ public class testModel {
 			System.out.println(simulador.getCandidatos()[i]);
 		}
 		
-		//simulador.sorteo();
+		System.out.println("muestro resultados:");
+		simulador.sorteo();
+		
+		
+		for (int i = 0; i < simulador.getLstProcesos().size(); i++) {
+			System.out.println(simulador.getLstProcesos().get(i));
+			System.out.println();
+		}
 
 		
 		

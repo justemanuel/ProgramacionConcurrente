@@ -23,11 +23,12 @@ public class Simulador {
 	public void sorteo() {		
 		int runTime = 0;
 		while(runTime < cpuTime || candidatos.length == 0) {
-			int sorteado = (int) Math.random()*(candidatos.length-1);
+			int sorteado = (int) (Math.random()* (candidatos.length-1)); //si sale sorteado el 7 hay un error de IndexOutOfBound
+			System.out.println(sorteado );
 			if(this.traerProceso(candidatos[sorteado]).actualizar(cpuTime)) {
+				System.out.println("actualizo");
 				candidatos = this.actualizarCandidatos(sorteado);
 			}
-			
 			runTime++;
 		}
 		cpuTime = runTime;
@@ -43,6 +44,7 @@ public class Simulador {
 				nuevo[i] = candidatos[i+1];
 			}
 		}
+		System.out.println("total candidatos: " + nuevo.length);
 		return nuevo;
 	}
 	
