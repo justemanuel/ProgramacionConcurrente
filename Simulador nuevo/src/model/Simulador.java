@@ -2,10 +2,12 @@ package model;
 
 import java.util.*;
 
+import org.apache.commons.lang3.ArrayUtils;
+
+
 public class Simulador {
 	private int cpuTime;
 	private List<Proceso> lstProcesos = new ArrayList<Proceso>();
-	//private List<Integer> lstCandidatos = new ArrayList<Integer>();
 	int candidatos[] = new int[8];
 	Proceso aux;
 	
@@ -22,11 +24,11 @@ public class Simulador {
 	
 	public void sorteo() {		
 		int runTime = 0;
-		while(runTime < cpuTime || candidatos.length == 0) {
-			int sorteado = (int) (Math.random()* (candidatos.length-1)); //si sale sorteado el 7 hay un error de IndexOutOfBound
-			System.out.println(sorteado );
+		while(runTime < cpuTime && candidatos.length != 0) {
+			int sorteado = (int) (Math.random()* (candidatos.length)); //devuelve posicion del array
+			System.out.println("posicion sorteada: "+sorteado);
 			if(this.traerProceso(candidatos[sorteado]).actualizar(cpuTime)) {
-				System.out.println("actualizo");
+				System.out.println("\nactualizo posicion: "+sorteado+"\n");
 				candidatos = this.actualizarCandidatos(sorteado);
 			}
 			runTime++;
@@ -36,31 +38,14 @@ public class Simulador {
 	}
 	
 	private int[] actualizarCandidatos(int sorteado) {
-		int[] nuevo = new int[candidatos.length-1];
-		for (int i = 0; i < candidatos.length; i++) {
-			if(candidatos[i] != sorteado) {
-				nuevo[i] = candidatos[i];
-			}else {
-				nuevo[i] = candidatos[i+1];
-			}
-		}
-		System.out.println("total candidatos: " + nuevo.length);
-		return nuevo;
+		
+		candidatos = ArrayUtils.removeElement(candidatos, candidatos[sorteado]);
+		
+		return candidatos;
 	}
 	
-	
-	private Proceso traerProceso(int id) {
-		int i = 0;
-		boolean encontrado = false;
-		Proceso aux = null;
-		while(i < lstProcesos.size() && !encontrado) {
-			if(lstProcesos.get(i).getIdProceso() == id) {
-				encontrado = true;
-				aux = lstProcesos.get(i);
-			}
-			i++;
-		}
-		return aux;
+	private Proceso traerProceso(int id) {//recibis la posicion del proceso en la lista
+		return lstProcesos.get(id);
 	}
 	
 	private int generarIdProceso() {
@@ -70,22 +55,6 @@ public class Simulador {
 			return lstProcesos.get(lstProcesos.size()-1).getIdProceso()+1;
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	public double getCpuTime() {
 		return cpuTime;

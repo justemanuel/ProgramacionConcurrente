@@ -25,22 +25,6 @@ public class Proceso {
 		return terminado;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public int getIdProceso() {
 		return idProceso;
 	}

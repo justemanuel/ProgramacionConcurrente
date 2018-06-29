@@ -10,7 +10,7 @@ public class testModel {
 		simulador.agregarProceso(50);
 		simulador.agregarProceso(1000);
 		simulador.agregarProceso(850);
-		simulador.agregarProceso(1500);
+		simulador.agregarProceso(110);
 		simulador.agregarProceso(1400);
 		simulador.agregarProceso(1200);
 		simulador.agregarProceso(1300);
@@ -33,12 +33,5 @@ public class testModel {
 			System.out.println(simulador.getLstProcesos().get(i));
 			System.out.println();
 		}
-
-		
-		
-		
-		
-		
-		
 	}
 }
